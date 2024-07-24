@@ -73,7 +73,7 @@ contract Marketplace {
         // sha3 and now have been deprecated
         return
             uint256(
-                keccak256(abi.encodePacked(block.difficulty, block.timestamp))
+                keccak256(abi.encodePacked(block.prevrandao, block.timestamp))
             );
         // convert hash to integer
         // players is an array of entrants
