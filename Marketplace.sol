@@ -65,8 +65,19 @@ contract Marketplace {
         bytes productId,
         bytes tradeId
     );
+    uint256 counter = 1;
 
     constructor() {}
+
+    function random() private view returns (uint256) {
+        // sha3 and now have been deprecated
+        return
+            uint256(
+                keccak256(abi.encodePacked(block.difficulty, block.timestamp))
+            );
+        // convert hash to integer
+        // players is an array of entrants
+    }
 
     function listProduct(Product memory _product)
         public
@@ -275,7 +286,7 @@ contract Marketplace {
                 tradeDetails.seller,
                 0,
                 0,
-                1
+                (random() % 50) + 1 // any random number between 1-51
             );
         } else {
             revert UserNotAssociatedWithTrade();
